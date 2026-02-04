@@ -12,9 +12,6 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
-    env:
-      NODE_ENV: test
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -22,10 +19,13 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: "lts/*"
+          node-version: "lts/*" # 또는 프로젝트에 필요한 Node.js 버전
 
       - name: Install dependencies
         run: npm install
+
+      - name: Type Check
+        run: npm run typecheck
 
       - name: Run Tests
         run: npm run test
